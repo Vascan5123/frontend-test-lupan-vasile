@@ -1,5 +1,14 @@
 # frontend-test-lupan-vasile
 
+### Vercel URL
+```
+https://frontend-test-lupan-vasile.vercel.app/
+```
+
+### Coding Challenge in the project root folder
+
+
+
 ## Project setup
 ```
 npm install
@@ -15,10 +24,3 @@ npm run serve
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
