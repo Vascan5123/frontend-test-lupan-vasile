@@ -1,7 +1,7 @@
 <template>
   <v-app id="app">
     <v-main>
-      <v-container fluid>
+      <v-container fluid class="fill-height" align-content-start>
         <v-row justify="center" class="mb-0 row_tabs">
           <v-col
             cols="6"
@@ -41,11 +41,11 @@
           </v-col>
         </v-row>
         <hr class="separation" />
-        <v-row justify="center">
-          <v-col cols="12" lg="9">
+        <v-row justify="center" class="my-0">
+          <v-col cols="12" lg="9" v-show="page == 0 || $vuetify.breakpoint.lgAndUp">
             <Products />
           </v-col>
-          <v-col cols="12" lg="3">
+          <v-col cols="12" lg="3" :class="$vuetify.breakpoint.lgAndUp ? 'feedback' : ''" v-show="page == 1 || $vuetify.breakpoint.lgAndUp">
             <Feedback />
           </v-col>
         </v-row>
@@ -136,6 +136,10 @@ export default {
   letter-spacing: 1px;
 }
 .separation {
-  border: solid 1px rgba(248, 248, 248, 1);
+  border: solid 1px #EDEDED;
+  width: 100%;
+}
+.feedback {
+  background: #F8F8F8;
 }
 </style>
