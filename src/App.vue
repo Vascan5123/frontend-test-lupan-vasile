@@ -1,57 +1,39 @@
 <template>
-  <v-app id="app">
-    <v-main>
-      <v-container fluid class="fill-height" align-content-start>
-        <v-row justify="center" class="mb-0 row_tabs">
-          <v-col
-            cols="6"
-            lg="9"
-            class="pa-0"
-            :class="page == 1 && !$vuetify.breakpoint.lgAndUp ? 'white' : ''"
+  <div id="app">
+    <div class="main-container">
+      <div class="row-tabs">
+        <div class="col-tab-products" :class="page == 1 ? 'col-tab-white' : ''">
+          <div
+            class="tab"
+            :class="page == 0 ? 'active-tab-1' : 'other-tab-1'"
+            @click="page = 0"
           >
-            <div
-              v-show="!$vuetify.breakpoint.lgAndUp"
-              class="tab py-3"
-              :class="page == 0 ? 'active-tab-1' : 'other-tab-1'"
-              @click="page = 0"
-            >
-              Products
-            </div>
-            <div v-show="$vuetify.breakpoint.lgAndUp" class="tab_lg py-3 white">
-              Products
-            </div>
-          </v-col>
-          <v-col
-            cols="6"
-            lg="3"
-            class="pa-0"
-            :class="page == 0 && !$vuetify.breakpoint.lgAndUp ? 'white' : ''"
+            Products
+          </div>
+          <div class="tab_lg white">Products</div>
+        </div>
+        <div class="col-tab-feedback" :class="page == 0 ? 'col-tab-white' : ''">
+          <div
+            class="tab"
+            :class="page == 1 ? 'active-tab-2' : 'other-tab-2'"
+            @click="page = 1"
           >
-            <div
-              v-show="!$vuetify.breakpoint.lgAndUp"
-              class="tab py-3"
-              :class="page == 1 ? 'active-tab-2' : 'other-tab-2'"
-              @click="page = 1"
-            >
-              Feedback
-            </div>
-            <div v-show="$vuetify.breakpoint.lgAndUp" class="tab_lg py-3">
-              Feedback
-            </div>
-          </v-col>
-        </v-row>
-        <hr class="separation" />
-        <v-row justify="center" class="my-0">
-          <v-col cols="12" lg="9" v-show="page == 0 || $vuetify.breakpoint.lgAndUp">
-            <Products />
-          </v-col>
-          <v-col cols="12" lg="3" :class="$vuetify.breakpoint.lgAndUp ? 'feedback' : ''" v-show="page == 1 || $vuetify.breakpoint.lgAndUp">
-            <Feedback />
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-app>
+            Feedback
+          </div>
+          <div class="tab_lg">Feedback</div>
+        </div>
+      </div>
+      <hr class="separation" />
+      <div class="row-content">
+        <div class="col-content-products" v-show="page == 0">
+          <Products />
+        </div>
+        <div class="col-content-feedback" v-show="page == 1">
+          <Feedback />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -74,11 +56,34 @@ export default {
 #app {
   background: #fff;
 }
-.row_tabs {
+
+.main-container {
+  width: 100%;
+}
+.row-tabs {
+  justify-content: center;
+  display: flex;
   background: #f8f8f8;
+}
+.col-tab-products,
+.col-tab-feedback {
+  width: 50%;
+}
+.row-content {
+  justify-content: center;
+  display: flex;
+}
+.col-content-products,
+.col-content-feedback {
+  padding: 12px;
+  width: 100%;
 }
 .tab {
   width: 100%;
+  padding: 12px;
+}
+.tab_lg {
+  padding: 12px;
 }
 .active-tab-1 {
   background: #fff;
@@ -136,10 +141,51 @@ export default {
   letter-spacing: 1px;
 }
 .separation {
-  border: solid 1px #EDEDED;
+  border: solid 1px #ededed;
   width: 100%;
+  margin: 0px;
 }
-.feedback {
-  background: #F8F8F8;
+
+@media (min-width: 1264px) {
+  .col-tab-products {
+    width: 75%;
+  }
+  .col-tab-feedback {
+    width: 25%;
+  }
+  .col-content-products {
+    width: 75%;
+    display: block !important;
+  }
+  .col-content-feedback {
+    width: 25%;
+    background: #f8f8f8;
+    display: block !important;
+  }
+  .tab {
+    display: none;
+  }
+}
+@media (max-width: 1264px) {
+  .tab_lg {
+    display: none;
+  }
+  .col-tab-white {
+    color: white;
+  }
+}
+</style>
+<style>
+html {
+    box-sizing: border-box;
+    overflow-y: scroll;
+    -webkit-text-size-adjust: 100%;
+    word-break: normal;
+}
+body {
+  margin: 0px;
+}
+*, :after, :before {
+    box-sizing: inherit;
 }
 </style>

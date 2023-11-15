@@ -1,81 +1,35 @@
 <template>
-  <v-form @submit.prevent ref="form">
-    <v-row class="mx-0 my-3">
-      <v-col cols="12">
-        <v-card class="cards pa-4" flat>
-          <v-card-text class="cards-text pa-0">Name</v-card-text>
-          <v-text-field
-            class="pa-0 cards-input"
-            v-model="name"
-            hide-details
-          ></v-text-field>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row class="mx-0 my-3">
-      <v-col cols="12">
-        <v-card class="cards pa-4" flat>
-          <v-card-text class="cards-text pa-0">Phone number</v-card-text>
-          <v-text-field
-            class="pa-0 cards-input"
-            v-model="phone"
-            hide-details
-          ></v-text-field>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row class="mx-0 my-3">
-      <v-col cols="12">
-        <v-card class="cards pa-4" flat>
-          <v-card-text class="cards-text pa-0">Email</v-card-text>
-          <v-text-field
-            type="email"
-            class="pa-0 cards-input"
-            v-model="email"
-            hide-details
-          ></v-text-field>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row class="mx-0 my-3">
-      <v-col cols="12">
-        <v-card class="cards pa-4" flat>
-          <v-card-text class="cards-text pa-0">Message</v-card-text>
-          <v-textarea
-            class="pa-0 cards-input"
-            v-model="message"
-            hide-details
-          ></v-textarea>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row class="mx-0 my-3">
-      <v-col cols="12" sm="6" lg="12">
-        <v-btn
-          :class="
-            $vuetify.breakpoint.lgAndUp
-              ? 'cards-btn-desktop'
-              : 'cards-btn-mobile'
-          "
-          :disabled="!name || !phone || !email || !message"
-          class="cards-btn"
-          block
-          elevation="0"
-          x-large
-          @click="reset"
-        >
-          Submit
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-form>
+  <form @submit.prevent class="form-feedback">
+    <div class="cards">
+      <div class="cards-text">Name</div>
+      <input type="text" class="cards-input" v-model="name" />
+    </div>
+    <div class="cards">
+      <div class="cards-text">Phone number</div>
+      <input type="text" class="cards-input" v-model="phone" />
+    </div>
+    <div class="cards">
+      <div class="cards-text">Email</div>
+      <input type="text" class="cards-input" v-model="email" />
+    </div>
+    <div class="cards">
+      <div class="cards-text">Message</div>
+      <textarea class="cards-input" v-model="message" rows="5"></textarea>
+    </div>
+    <button
+      :disabled="!name || !phone || !email || !message"
+      class="cards-btn"
+      @click="reset"
+    >
+      Submit
+    </button>
+  </form>
 </template>
 
 <script>
 export default {
   name: "FeedbackComponent",
   data: () => ({
-    valid: true,
     name: "Name",
     phone: "+000 (00) 012-34-56",
     email: "username@example.com",
@@ -84,80 +38,108 @@ export default {
   }),
   methods: {
     reset() {
-      this.$refs.form.reset();
-    },
+      this.name = '';
+      this.phone = '';
+      this.email = '';
+      this.message = '';
+    }
   },
 };
 </script>
 
 <style scoped>
+.form-feedback {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
 .cards {
   border-radius: 16px;
+  padding: 16px;
+  background-color: #ffffff;
 }
-.cards-btn-desktop.v-btn {
+.cards-text {
+  color: #909090;
+  font-family: "Roboto";
+  font-size: 16px;
+  font-weight: 400;
+}
+.cards-btn {
+  text-align: center;
   border-radius: 16px;
   color: #0080f6;
-  background-color: #ffffff;
   text-align: center;
   font-family: "Roboto";
   font-size: 20px;
   font-weight: 400;
   text-transform: none;
+  padding: 16px 32px;
+  border-style: none;
 }
-.cards-btn-desktop:disabled {
-  color: #909090;
-  background-color: #ffffff;
-}
-.cards-btn-desktop:hover {
-  color: #0063be;
-  background-color: #fdfdfd;
-}
-.cards-btn-desktop:focus-visible {
-  color: #0063be;
-  background-color: #ffffff;
-  border: 2px solid #0080f6;
-}
-.cards-btn-desktop:active {
-  color: #0080f6;
-  background-color: #ffffff;
-  transform: scale(0.95);
-}
-.cards-btn-mobile.v-btn {
-  border-radius: 16px;
-  color: #0080f6;
-  background-color: #f8f8f8;
-  text-align: center;
-  font-family: "Roboto";
-  font-size: 20px;
-  font-weight: 400;
-  text-transform: none;
-}
-.cards-btn-mobile:disabled {
-  color: #909090;
-  background-color: #f8f8f8;
-}
-.cards-btn-mobile:hover {
-  color: #0063be;
-  background-color: #eee;
-}
-.cards-btn-mobile:focus-visible {
-  color: #0063be;
-  background-color: #f8f8f8;
-  border: 2px solid #0080f6;
-}
-.cards-btn-mobile:active {
-  color: #0080f6;
-  background-color: #f8f8f8;
-  transform: scale(0.95);
-}
-</style>
-<style>
-.cards-input input {
-  color: #333 !important;
+.cards-input {
+  background-color: transparent;
+  border-style: none;
+  width: 100%;
+  color: #333;
   font-family: "Roboto";
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
+  border-bottom: 1px solid #ededed;
+  margin-top: 8px;
+}
+.cards-input:focus {
+  outline: none;
+  border-bottom: 1px solid #0063be !important;
+}
+@media (min-width: 1264px) {
+  .cards-btn {
+    background-color: #ffffff;
+  }
+  .cards-btn:disabled {
+    color: #909090 !important;
+    background-color: #ffffff !important;
+    transform: none !important;
+  }
+  .cards-btn:hover {
+    color: #0063be;
+    background-color: #fdfdfd;
+  }
+  .cards-btn:focus-visible {
+    color: #0063be;
+    background-color: #ffffff;
+    border: 2px solid #0080f6;
+  }
+  .cards-btn:active {
+    color: #0080f6;
+    background-color: #ffffff;
+    transform: scale(0.95);
+  }
+}
+@media (max-width: 1264px) {
+  .cards-btn {
+    background-color: #f8f8f8;
+  }
+  .cards-btn:disabled {
+    color: #909090 !important;
+    background-color: #f8f8f8 !important;
+    transform: none !important;
+  }
+  .cards-btn:hover {
+    color: #0063be;
+    background-color: #eee;
+  }
+  .cards-btn:focus-visible {
+    color: #0063be;
+    background-color: #f8f8f8;
+    border: 2px solid #0080f6;
+  }
+  .cards-btn:active {
+    color: #0080f6;
+    background-color: #f8f8f8;
+    transform: scale(0.95);
+  }
 }
 </style>

@@ -1,23 +1,17 @@
 <template>
-  <v-row class="text-center mt-8 mx-0">
-    <v-col cols="12" sm="6" lg="4" v-for="card in cards" :key="card.id">
-      <v-card flat class="pa-6 cards" :class="card.class">
-        <v-img :src="card.image" width="85%" class="mx-auto"> </v-img>
-        <v-card-title
-          class="justify-center my-4 cards-title"
-          :style="'color: ' + card.textColor"
-        >
+  <div class="row-products">
+    <div class="col-product" v-for="card in cards" :key="card.id">
+      <div class="product" :class="card.class">
+        <img :src="card.image" width="85%" />
+        <div class="product-title" :style="'color: ' + card.textColor">
           {{ card.title }}
-        </v-card-title>
-        <v-card-subtitle
-          :style="'color: ' + card.textColor"
-          class="cards-subtitle"
-        >
-          {{ card.subtitle }}</v-card-subtitle
-        >
-      </v-card>
-    </v-col>
-  </v-row>
+        </div>
+        <div :style="'color: ' + card.textColor" class="product-subtitle">
+          {{ card.subtitle }}
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -113,20 +107,35 @@ export default {
 </script>
 
 <style scoped>
-.cards {
-  border-radius: 16px;
+.row-products {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  margin-top: 12px;
 }
-.cards-title {
+.col-product {
+  width: 100%;
+  padding: 12px;
+}
+.product {
+  border-radius: 16px;
+  padding: 24px;
+}
+.product-title {
   font-family: "Roboto";
   font-size: 24px;
   font-weight: 600;
   line-height: 32px;
+  margin-top: 16px;
 }
-.cards-subtitle {
+.product-subtitle {
   font-family: "Roboto";
   font-size: 20px;
   font-weight: 400;
   line-height: 24px;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 .orangeCard {
   background-color: #fff6ce;
@@ -163,5 +172,16 @@ export default {
 }
 .blackCard:focus-visible {
   border: 2px solid #37006d;
+}
+
+@media (min-width: 600px) {
+  .col-product {
+    width: 50%;
+  }
+}
+@media (min-width: 1264px) {
+  .col-product {
+    width: 33.33%;
+  }
 }
 </style>
